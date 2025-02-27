@@ -1,5 +1,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "../vendor/stb_image.h"
 
@@ -46,11 +49,12 @@ int main() {
     glViewport(0, 0, 800, 600);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
+
     float vertices[] = {
-        -0.5f, -0.5f, 0.0f, 1.0f, 1.0f,
-         0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-         0.5f,  0.5f, 0.0f, 0.0f, 0.0f,
-        -0.5f,  0.5f, 0.0f, 0.0f, 1.0f
+        -0.7f, -0.7f, 0.0f, 1.0f, 1.0f,
+         0.7f, -0.7f, 0.0f, 1.0f, 0.0f,
+         0.7f,  0.7f, 0.0f, 0.0f, 0.0f,
+        -0.7f,  0.7f, 0.0f, 0.0f, 1.0f
     };
 
     unsigned int indices[] = {
@@ -58,14 +62,10 @@ int main() {
         1, 2, 3 
     };
 
-    // ---------------------------- texture stuff ----------------------------
-    Texture tex1("res/container.jpg", "jpg");
-    Texture tex2("res/awesomeface.png", "png");
+    Texture tex1("res/sillyCat.jpg", "jpg");
 
-    // ---------------------------- index stuff ----------------------------
     IndexBuffer IBO(sizeof(indices) / sizeof(unsigned int), indices);
 
-    // ---------------------------- vertex stuff ----------------------------
     VertexBuffer VBO(5 * 4 * sizeof(float), vertices);
 
     VertexArray VAO;
@@ -80,9 +80,11 @@ int main() {
 
     Shader shader("shaders//vertex.shader", "shaders//fragment.shader");
 
+    //transformation
+    
     shader.use();
     shader.setInt("texture1", 0);
-    shader.setInt("texture2", 1);
+   
 
     // Render loop
     while (!glfwWindowShouldClose(window)) {
@@ -91,9 +93,14 @@ int main() {
         glClearColor(0.2f, 0.5f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        glm::mat4 trans = glm::mat4(1.0f);
+		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+
         tex1.bind(0);
-        tex2.bind(1);
+
         shader.use();
+        shader.setMat4f("transform", trans);
+
         VAO.bind();
 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
