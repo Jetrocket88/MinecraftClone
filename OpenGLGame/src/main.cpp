@@ -49,24 +49,32 @@ int main() {
     glViewport(0, 0, 800, 600);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-
     float vertices[] = {
-        -0.7f, -0.7f, 0.0f, 1.0f, 1.0f,
-         0.7f, -0.7f, 0.0f, 1.0f, 0.0f,
-         0.7f,  0.7f, 0.0f, 0.0f, 0.0f,
-        -0.7f,  0.7f, 0.0f, 0.0f, 1.0f
+        // Positions         // Texture Coords
+        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // 0
+         0.5f, -0.5f, -0.5f,  1.0f, 0.0f, // 1
+         0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // 2
+        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, // 3
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // 4
+         0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // 5
+         0.5f,  0.5f,  0.5f,  1.0f, 1.0f, // 6
+        -0.5f,  0.5f,  0.5f,  0.0f, 1.0f  // 7
     };
 
     unsigned int indices[] = {
-        0, 1, 3,
-        1, 2, 3 
+        0, 1, 2, 2, 3, 0, // Back face
+        4, 5, 6, 6, 7, 4, // Front face
+        4, 5, 1, 1, 0, 4, // Bottom face
+        7, 6, 2, 2, 3, 7, // Top face
+        4, 0, 3, 3, 7, 4, // Left face
+        5, 1, 2, 2, 6, 5  // Right face
     };
 
     Texture tex1("res/sillyCat.jpg", "jpg");
 
     IndexBuffer IBO(sizeof(indices) / sizeof(unsigned int), indices);
 
-    VertexBuffer VBO(5 * 4 * sizeof(float), vertices);
+    VertexBuffer VBO(5 * 8 * sizeof(float), vertices);
 
     VertexArray VAO;
     VertexBufferLayout layout;
@@ -93,17 +101,28 @@ int main() {
         glClearColor(0.2f, 0.5f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glm::mat4 trans = glm::mat4(1.0f);
-		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+        //model 
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::rotate(model, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+        //veiw
+        glm::mat4 view = glm::mat4(1.0f);
+        view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+
+        //projection
+        glm::mat4 projection;
+        projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+
 
         tex1.bind(0);
 
         shader.use();
-        shader.setMat4f("transform", trans);
+        shader.setMat4f("model", model);
+        shader.setMat4f("view", view);
+        shader.setMat4f("projection", projection);
 
         VAO.bind();
 
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
 
         glfwSwapBuffers(window);
