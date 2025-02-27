@@ -11,6 +11,7 @@ void main() {
 		
 	vec4 texColor = texture(texture1, TexCoord);
 	vec4 tintColor = vec4(0.3, 0.0, 1.0, 1.0);
+	tintColor = vec4(0.0, 0.0, 0.0, 0.0);
 	FragColor = mix(texColor, tintColor, 0.2);
 }
 
