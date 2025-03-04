@@ -116,7 +116,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -133,10 +133,12 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\block.cpp" />
+    <ClCompile Include="src\chunk.cpp" />
     <ClCompile Include="src\indexBuffer.cpp" />
     <ClCompile Include="src\texture.cpp" />
     <ClCompile Include="src\vertexArray.cpp" />
@@ -147,9 +149,12 @@
     <ClCompile Include="vendor\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\block.h" />
+    <ClInclude Include="src\chunk.h" />
     <ClInclude Include="src\indexBuffer.h" />
     <ClInclude Include="src\shader.h" />
     <ClInclude Include="src\texture.h" />
+    <ClInclude Include="src\vertex.h" />
     <ClInclude Include="src\vertexArray.h" />
     <ClInclude Include="src\vertexBuffer.h" />
     <ClInclude Include="src\vertexBufferLayout.h" />

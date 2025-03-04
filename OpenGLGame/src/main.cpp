@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+//#include <SFML/Audio.hpp>
 
 #include "../vendor/stb_image.h"
 
@@ -15,6 +16,7 @@
 #include "vertexBuffer.h"
 #include "vertexArray.h"
 #include "vertexBufferLayout.h"
+#include "vertex.h"
 
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
@@ -28,6 +30,38 @@ float lastX = 400, lastY = 300;
 float yaw = -90.0f;
 float pitch = 0.0f;
 float fov = 45;
+
+/*float vertices[] = {
+	// Positions         // Texture Coords
+	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // 0
+	 0.5f, -0.5f, -0.5f,  1.0f, 0.0f, // 1
+	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // 2
+	-0.5f,  0.5f, -0.5f,  0.0f, 1.0f, // 3
+	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // 4
+	 0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // 5
+	 0.5f,  0.5f,  0.5f,  1.0f, 1.0f, // 6
+	-0.5f,  0.5f,  0.5f,  0.0f, 1.0f  // 7
+};*/
+
+const std::vector<glm::vec3> vertices = 
+{
+    { 0, 0, 0 }, { 1, 0, 0 }, { 1, 1, 0 }, { 0, 1, 0 },
+    { 0, 0, 1 }, { 1, 0, 1 }, { 1, 1, 1 }, { 0, 1, 1 } 
+};
+
+const glm::vec2 faceTexCoords[4] = 
+{
+    {0, 0}, {1, 0}, {1, 1}, {0, 1}
+};
+
+unsigned int indices[] = {
+	0, 1, 2, 2, 3, 0, // Back face
+	4, 5, 6, 6, 7, 4, // Front face
+	4, 5, 1, 1, 0, 4, // Bottom face
+	7, 6, 2, 2, 3, 7, // Top face
+	4, 0, 3, 3, 7, 4, // Left face
+	5, 1, 2, 2, 6, 5  // Right face
+};
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
@@ -107,8 +141,6 @@ int main() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-
-
     GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     if (window == NULL)
@@ -126,49 +158,26 @@ int main() {
     glViewport(0, 0, 800, 600);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-    float vertices[] = {
-        // Positions         // Texture Coords
-        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // 0
-         0.5f, -0.5f, -0.5f,  1.0f, 0.0f, // 1
-         0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // 2
-        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, // 3
-        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // 4
-         0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // 5
-         0.5f,  0.5f,  0.5f,  1.0f, 1.0f, // 6
-        -0.5f,  0.5f,  0.5f,  0.0f, 1.0f  // 7
-    };
+    std::vector<Vertex> verticesStruct;
+    for (int i = 0; i < vertices.size(); i++) {
+        Vertex v;
+        v.vecPositions = vertices[i];
+        v.texCoords = faceTexCoords[i % 4];
+        v.ColorValues = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+        verticesStruct.push_back(v);
+    }
 
-    unsigned int indices[] = {
-        0, 1, 2, 2, 3, 0, // Back face
-        4, 5, 6, 6, 7, 4, // Front face
-        4, 5, 1, 1, 0, 4, // Bottom face
-        7, 6, 2, 2, 3, 7, // Top face
-        4, 0, 3, 3, 7, 4, // Left face
-        5, 1, 2, 2, 6, 5  // Right face
-    };
-
-    glm::vec3 cubePositions[] = {
-		glm::vec3(0.0f,  0.0f,  0.0f),
-		glm::vec3(2.0f,  5.0f, -15.0f),
-		glm::vec3(-1.5f, -2.2f, -2.5f),
-		glm::vec3(-3.8f, -2.0f, -12.3f),
-		glm::vec3(2.4f, -0.4f, -3.5f),
-		glm::vec3(-1.7f,  3.0f, -7.5f),
-		glm::vec3(1.3f, -2.0f, -2.5f),
-		glm::vec3(1.5f,  2.0f, -2.5f),
-		glm::vec3(1.5f,  0.2f, -1.5f),
-		glm::vec3(-1.3f,  1.0f, -1.5f)
-    };
 
     Texture tex1("res/sillyCat.jpg", "jpg");
 
     IndexBuffer IBO(sizeof(indices) / sizeof(unsigned int), indices);
 
-    VertexBuffer VBO(5 * 8 * sizeof(float), vertices);
+    VertexBuffer VBO(9 * 8 * sizeof(float), verticesStruct.data());
 
     VertexArray VAO;
     VertexBufferLayout layout;
     layout.Push<float>(3);
+    layout.Push<float>(4);
     layout.Push<float>(2);
     VAO.addBuffer(VBO, layout);
 
@@ -178,8 +187,6 @@ int main() {
 
     Shader shader("shaders//vertex.shader", "shaders//fragment.shader");
 
-    //transformation
-    
     shader.use();
     shader.setInt("texture1", 0);
    
@@ -190,7 +197,7 @@ int main() {
         glfwSetCursorPosCallback(window, mouse_callback);
         glfwSetScrollCallback(window, scroll_callback);
         
-        glClearColor(0.2f, 0.5f, 0.3f, 1.0f);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         float currentFrame = glfwGetTime();
@@ -201,30 +208,30 @@ int main() {
         shader.use();
 
         VAO.bind();
-        for (unsigned int i = 0; i < 10; i++) {
 
-            glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
-            glm::vec3 cameraDirection = glm::normalize(cameraPos - cameraTarget);
-            glm::mat4 view;
-            const float radius = 10.0f;
-            float camX = sin(glfwGetTime()) * radius;
-            float camZ = cos(glfwGetTime()) * radius;
-            view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+		glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+		glm::vec3 cameraDirection = glm::normalize(cameraPos - cameraTarget);
+		glm::mat4 view;
+		const float radius = 10.0f;
+		float camX = sin(glfwGetTime()) * radius;
+		float camZ = cos(glfwGetTime()) * radius;
+		view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 
 
-            shader.setMat4f("view", view);
-            glm::mat4 projection;
-			projection = glm::perspective(glm::radians(fov), 800.0f / 600.0f, 0.1f, 100.0f);
+		shader.setMat4f("view", view);
+		glm::mat4 projection;
+		projection = glm::perspective(glm::radians(fov), 800.0f / 600.0f, 0.1f, 100.0f);
 
-            shader.setMat4f("projection", projection);
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, cubePositions[i]);
-            float angle = 20.0f * i;
-            model = glm::rotate(model, glm::radians(angle) * (float)glfwGetTime(), glm::vec3(1.0f, 0.3f, 0.5f));
-            shader.setMat4f("model", model);
+		shader.setMat4f("projection", projection);
+		glm::mat4 model = glm::mat4(1.0f);
+		float angle = 20.0f;
+		model = glm::rotate(model, glm::radians(angle) * (float)glfwGetTime(), glm::vec3(1.0f, 0.3f, 0.5f));
+		shader.setMat4f("model", model);
 
-            glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		}
+		float vector[4] = { (float)sin(glfwGetTime()), (float)cos(glfwGetTime()), (float)acos(glfwGetTime()), 1.0 };
+		shader.setVec4f("color1", vector);
+
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
         glBindVertexArray(0);
 
