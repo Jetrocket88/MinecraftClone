@@ -3,7 +3,6 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-//#include <SFML/Audio.hpp>
 
 #include "../vendor/stb_image.h"
 
@@ -31,18 +30,6 @@ float yaw = -90.0f;
 float pitch = 0.0f;
 float fov = 45;
 
-/*float vertices[] = {
-	// Positions         // Texture Coords
-	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // 0
-	 0.5f, -0.5f, -0.5f,  1.0f, 0.0f, // 1
-	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // 2
-	-0.5f,  0.5f, -0.5f,  0.0f, 1.0f, // 3
-	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // 4
-	 0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // 5
-	 0.5f,  0.5f,  0.5f,  1.0f, 1.0f, // 6
-	-0.5f,  0.5f,  0.5f,  0.0f, 1.0f  // 7
-};*/
-
 const std::vector<glm::vec3> vertices = 
 {
     { 0, 0, 0 }, { 1, 0, 0 }, { 1, 1, 0 }, { 0, 1, 0 },
@@ -54,14 +41,6 @@ const glm::vec2 faceTexCoords[4] =
     {0, 0}, {1, 0}, {1, 1}, {0, 1}
 };
 
-unsigned int indices[] = {
-	0, 1, 2, 2, 3, 0, // Back face
-	4, 5, 6, 6, 7, 4, // Front face
-	4, 5, 1, 1, 0, 4, // Bottom face
-	7, 6, 2, 2, 3, 7, // Top face
-	4, 0, 3, 3, 7, 4, // Left face
-	5, 1, 2, 2, 6, 5  // Right face
-};
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
@@ -158,21 +137,27 @@ int main() {
     glViewport(0, 0, 800, 600);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
+    unsigned int numCubes = 100;
+
     std::vector<Vertex> verticesStruct;
-    for (int i = 0; i < vertices.size(); i++) {
-        Vertex v;
-        v.vecPositions = vertices[i];
-        v.texCoords = faceTexCoords[i % 4];
-        v.ColorValues = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
-        verticesStruct.push_back(v);
+    for (int k = 0; k < numCubes; k++) {
+		for (int j = 0; j < numCubes; j++) {
+			for (int i = 0; i < 8; i++) {
+				Vertex v;
+				v.vecPositions = vertices[i] + glm::vec3(j, k, 0);
+				v.texCoords = faceTexCoords[i % 4];
+				v.ColorValues = glm::vec4(2.0f, 1.0f, 2.0f, 1.0f);
+				verticesStruct.push_back(v);
+			}
+		}
     }
 
 
     Texture tex1("res/sillyCat.jpg", "jpg");
 
-    IndexBuffer IBO(sizeof(indices) / sizeof(unsigned int), indices);
+    IndexBuffer IBO(numCubes);
 
-    VertexBuffer VBO(9 * 8 * sizeof(float), verticesStruct.data());
+    VertexBuffer VBO(9 * 8 * sizeof(float) * numCubes, verticesStruct.data());
 
     VertexArray VAO;
     VertexBufferLayout layout;
@@ -204,7 +189,7 @@ int main() {
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
 
-        tex1.bind(0);
+        //tex1.bind(0);
         shader.use();
 
         VAO.bind();
@@ -224,14 +209,12 @@ int main() {
 
 		shader.setMat4f("projection", projection);
 		glm::mat4 model = glm::mat4(1.0f);
-		float angle = 20.0f;
-		model = glm::rotate(model, glm::radians(angle) * (float)glfwGetTime(), glm::vec3(1.0f, 0.3f, 0.5f));
 		shader.setMat4f("model", model);
 
 		float vector[4] = { (float)sin(glfwGetTime()), (float)cos(glfwGetTime()), (float)acos(glfwGetTime()), 1.0 };
 		shader.setVec4f("color1", vector);
 
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, 36 * numCubes, GL_UNSIGNED_INT, 0);
 
         glBindVertexArray(0);
 

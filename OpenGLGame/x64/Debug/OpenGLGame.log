@@ -1,33 +1,14 @@
 ﻿  main.cpp
-C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(70,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(71,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(75,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(76,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(77,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(78,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(121,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(203,28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(216,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(217,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-glfw3.lib(init.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(init.obj)' or at ''; linking object as if no debug info
-glfw3.lib(window.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(window.obj)' or at ''; linking object as if no debug info
-glfw3.lib(input.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(input.obj)' or at ''; linking object as if no debug info
-glfw3.lib(context.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(context.obj)' or at ''; linking object as if no debug info
-glfw3.lib(win32_time.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(win32_time.obj)' or at ''; linking object as if no debug info
-glfw3.lib(win32_thread.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(win32_thread.obj)' or at ''; linking object as if no debug info
-glfw3.lib(platform.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(platform.obj)' or at ''; linking object as if no debug info
-glfw3.lib(monitor.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(monitor.obj)' or at ''; linking object as if no debug info
-glfw3.lib(vulkan.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(vulkan.obj)' or at ''; linking object as if no debug info
-glfw3.lib(win32_init.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(win32_init.obj)' or at ''; linking object as if no debug info
-glfw3.lib(null_init.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(null_init.obj)' or at ''; linking object as if no debug info
-glfw3.lib(win32_module.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(win32_module.obj)' or at ''; linking object as if no debug info
-glfw3.lib(win32_monitor.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(win32_monitor.obj)' or at ''; linking object as if no debug info
-glfw3.lib(win32_window.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(win32_window.obj)' or at ''; linking object as if no debug info
-glfw3.lib(win32_joystick.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(win32_joystick.obj)' or at ''; linking object as if no debug info
-glfw3.lib(wgl_context.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(wgl_context.obj)' or at ''; linking object as if no debug info
-glfw3.lib(egl_context.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(egl_context.obj)' or at ''; linking object as if no debug info
-glfw3.lib(osmesa_context.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(osmesa_context.obj)' or at ''; linking object as if no debug info
-glfw3.lib(null_monitor.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(null_monitor.obj)' or at ''; linking object as if no debug info
-glfw3.lib(null_window.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(null_window.obj)' or at ''; linking object as if no debug info
-glfw3.lib(null_joystick.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(null_joystick.obj)' or at ''; linking object as if no debug info
+C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(49,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(50,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(54,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(55,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(56,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(57,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(100,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(143,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(144,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(188,28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(201,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(202,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   OpenGLGame.vcxproj -> C:\Users\harry\source\repos\OpenGLGame\x64\Debug\OpenGLGame.exe
