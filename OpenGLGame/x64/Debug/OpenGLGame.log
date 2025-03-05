@@ -1,14 +1,16 @@
-﻿  main.cpp
-C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(49,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(50,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(54,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(55,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(56,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(57,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(100,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(143,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(144,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(188,28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(201,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(202,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  OpenGLGame.vcxproj -> C:\Users\harry\source\repos\OpenGLGame\x64\Debug\OpenGLGame.exe
+﻿  block.cpp
+  main.cpp
+C:\Users\User\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(47,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(48,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(52,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(53,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(54,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(55,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(98,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(182,28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(195,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(196,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+  OpenGLGame.vcxproj -> C:\Users\User\source\repos\OpenGLGame\x64\Debug\OpenGLGame.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.

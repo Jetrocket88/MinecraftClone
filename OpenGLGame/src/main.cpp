@@ -16,6 +16,7 @@
 #include "vertexArray.h"
 #include "vertexBufferLayout.h"
 #include "vertex.h"
+#include "block.h"
 
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
@@ -30,17 +31,14 @@ float yaw = -90.0f;
 float pitch = 0.0f;
 float fov = 45;
 
-const std::vector<glm::vec3> vertices = 
-{
+const std::vector<glm::vec3> vertices = {
     { 0, 0, 0 }, { 1, 0, 0 }, { 1, 1, 0 }, { 0, 1, 0 },
     { 0, 0, 1 }, { 1, 0, 1 }, { 1, 1, 1 }, { 0, 1, 1 } 
 };
 
-const glm::vec2 faceTexCoords[4] = 
-{
+const glm::vec2 faceTexCoords[4] = {
     {0, 0}, {1, 0}, {1, 1}, {0, 1}
 };
-
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
@@ -134,24 +132,20 @@ int main() {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
+
     glViewport(0, 0, 800, 600);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-    unsigned int numCubes = 100;
-
+    unsigned int numCubes = 0;
     std::vector<Vertex> verticesStruct;
-    for (int k = 0; k < numCubes; k++) {
-		for (int j = 0; j < numCubes; j++) {
-			for (int i = 0; i < 8; i++) {
-				Vertex v;
-				v.vecPositions = vertices[i] + glm::vec3(j, k, 0);
-				v.texCoords = faceTexCoords[i % 4];
-				v.ColorValues = glm::vec4(2.0f, 1.0f, 2.0f, 1.0f);
-				verticesStruct.push_back(v);
-			}
-		}
+	std::vector<block> blocks;
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            for (int k = 0; k < 10; k++) {
+		        blocks.push_back(block(i, k, j, verticesStruct, numCubes));
+            }
+        }
     }
-
 
     Texture tex1("res/sillyCat.jpg", "jpg");
 
