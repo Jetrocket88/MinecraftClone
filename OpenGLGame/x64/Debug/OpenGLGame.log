@@ -1,16 +1,13 @@
-﻿  block.cpp
-  main.cpp
-C:\Users\User\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(47,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\User\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(48,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\User\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(52,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\User\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(53,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\User\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(54,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\User\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(55,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\User\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(98,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\User\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(182,28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\User\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(195,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\User\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(196,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  Generating Code...
-  OpenGLGame.vcxproj -> C:\Users\User\source\repos\OpenGLGame\x64\Debug\OpenGLGame.exe
-  'pwsh.exe' is not recognized as an internal or external command,
-  operable program or batch file.
+﻿  main.cpp
+C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(47,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(48,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(52,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(53,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(54,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(55,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(98,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(182,28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(192,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\harry\source\repos\OpenGLGame\OpenGLGame\src\main.cpp(193,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+glfw3.lib(win32_joystick.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(win32_joystick.obj)' or at ''; linking object as if no debug info
+  OpenGLGame.vcxproj -> C:\Users\harry\source\repos\OpenGLGame\x64\Debug\OpenGLGame.exe

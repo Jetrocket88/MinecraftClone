@@ -183,10 +183,7 @@ int main() {
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
 
-        //tex1.bind(0);
         shader.use();
-
-        VAO.bind();
 
 		glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
 		glm::vec3 cameraDirection = glm::normalize(cameraPos - cameraTarget);
@@ -196,20 +193,21 @@ int main() {
 		float camZ = cos(glfwGetTime()) * radius;
 		view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 
-
 		shader.setMat4f("view", view);
 		glm::mat4 projection;
 		projection = glm::perspective(glm::radians(fov), 800.0f / 600.0f, 0.1f, 100.0f);
 
 		shader.setMat4f("projection", projection);
 		glm::mat4 model = glm::mat4(1.0f);
+        //model = glm::rotate(glm::mat4(1.0f), (float)glfwGetTime(), glm::vec3(0.0f, 1.0f, 0.0f));
 		shader.setMat4f("model", model);
 
 		float vector[4] = { (float)sin(glfwGetTime()), (float)cos(glfwGetTime()), (float)acos(glfwGetTime()), 1.0 };
-		shader.setVec4f("color1", vector);
+		//shader.setVec4f("color1", vector);
 
+        VAO.bind();
+        tex1.bind(0);
 		glDrawElements(GL_TRIANGLES, 36 * numCubes, GL_UNSIGNED_INT, 0);
-
         glBindVertexArray(0);
 
         glfwSwapBuffers(window);

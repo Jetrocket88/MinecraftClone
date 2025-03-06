@@ -18,13 +18,15 @@ public:
     block(int x, int y, int z, std::vector<Vertex>& vertexArray, unsigned int& count);
 
 private:
+    
     const std::vector<glm::vec3> vertices = {
         { 0, 0, 0 }, { 1, 0, 0 }, { 1, 1, 0 }, { 0, 1, 0 },
         { 0, 0, 1 }, { 1, 0, 1 }, { 1, 1, 1 }, { 0, 1, 1 } 
     };
 
-    const glm::vec2 faceTexCoords[4] = {
-        {0, 0}, {1, 0}, {1, 1}, {0, 1}
+    const glm::vec2 faceTexCoords[8] = {
+        {1, 1}, {1, 0}, {0, 0}, {0, 1},
+        {1, 1}, {1, 0}, {0, 0}, {0, 1}
     };
 
     const std::vector<glm::vec2> cubeTexCoords = {
@@ -33,6 +35,8 @@ private:
         {0.0f, 0.0f}, {1.0f, 0.0f}, {1.0f, 1.0f}, {0.0f, 1.0f},
         {0.0f, 0.0f}, {1.0f, 0.0f}, {1.0f, 1.0f}, {0.0f, 1.0f}
     };
+
+
 };
 
 #endif
