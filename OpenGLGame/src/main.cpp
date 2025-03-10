@@ -17,6 +17,7 @@
 #include "vertexBufferLayout.h"
 #include "vertex.h"
 #include "block.h"
+#include "face.h"
 
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
@@ -26,33 +27,24 @@ float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
 bool firstMouse = true;
-float lastX = 400, lastY = 300;
+float lastX = 400.0f, lastY = 300.0f;
 float yaw = -90.0f;
 float pitch = 0.0f;
-float fov = 45;
-
-const std::vector<glm::vec3> vertices = {
-    { 0, 0, 0 }, { 1, 0, 0 }, { 1, 1, 0 }, { 0, 1, 0 },
-    { 0, 0, 1 }, { 1, 0, 1 }, { 1, 1, 1 }, { 0, 1, 1 } 
-};
-
-const glm::vec2 faceTexCoords[4] = {
-    {0, 0}, {1, 0}, {1, 1}, {0, 1}
-};
+float fov = 45.0f;
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
     if (firstMouse)
     {
-        lastX = xpos;
-        lastY = ypos;
+        lastX = static_cast<float>(xpos);
+        lastY = static_cast<float>(ypos);
         firstMouse = false;
     }
 
-    float xoffset = xpos - lastX;
-    float yoffset = lastY - ypos;
-    lastX = xpos;
-    lastY = ypos;
+    float xoffset = static_cast<float>(xpos) - lastX;
+    float yoffset = lastY - static_cast<float>(ypos);
+    lastX = static_cast<float>(xpos);
+    lastY = static_cast<float>(ypos);
 
     float sensitivity = 0.1f;
     xoffset *= sensitivity;
@@ -75,7 +67,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-    fov -= (float)yoffset;
+    fov -= static_cast<float>(yoffset);
     if (fov < 1.0f)
         fov = 1.0f;
     if (fov > 45.0f)
@@ -95,7 +87,7 @@ void processInput(GLFWwindow* window) {
     if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
         cameraSpeed *= 2;
     }
-    float verticalSpeed = cameraSpeed * 0.5;
+    float verticalSpeed = cameraSpeed * 0.5f;
 
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         cameraPos += cameraSpeed * cameraFront;
@@ -138,20 +130,19 @@ int main() {
 
     unsigned int numCubes = 0;
     std::vector<Vertex> verticesStruct;
-	std::vector<block> blocks;
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
-            for (int k = 0; k < 10; k++) {
-		        blocks.push_back(block(i, k, j, verticesStruct, numCubes));
-            }
-        }
-    }
+    std::vector<face> faces;
+    faces.push_back(face(0, 0, 0, verticesStruct, numCubes, TOP));
+    faces.push_back(face(0, 0, 0, verticesStruct, numCubes, BACK));
+    faces.push_back(face(0, 0, 0, verticesStruct, numCubes, FRONT));
+    faces.push_back(face(0, 0, 0, verticesStruct, numCubes, RIGHT));
+    faces.push_back(face(0, 0, 0, verticesStruct, numCubes, LEFT));
+    faces.push_back(face(0, 0, 0, verticesStruct, numCubes, BOTTOM));
 
     Texture tex1("res/sillyCat.jpg", "jpg");
 
     IndexBuffer IBO(numCubes);
 
-    VertexBuffer VBO(9 * 8 * sizeof(float) * numCubes, verticesStruct.data());
+    VertexBuffer VBO(9 * 4 * sizeof(float) * numCubes, verticesStruct.data());
 
     VertexArray VAO;
     VertexBufferLayout layout;
@@ -168,46 +159,44 @@ int main() {
 
     shader.use();
     shader.setInt("texture1", 0);
-   
+
     glEnable(GL_DEPTH_TEST);
     // Render loop
     while (!glfwWindowShouldClose(window)) {
         processInput(window);
         glfwSetCursorPosCallback(window, mouse_callback);
         glfwSetScrollCallback(window, scroll_callback);
-        
+
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        float currentFrame = glfwGetTime();
+        float currentFrame = static_cast<float>(glfwGetTime());
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
 
         shader.use();
 
-		glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
-		glm::vec3 cameraDirection = glm::normalize(cameraPos - cameraTarget);
-		glm::mat4 view;
-		const float radius = 10.0f;
-		float camX = sin(glfwGetTime()) * radius;
-		float camZ = cos(glfwGetTime()) * radius;
-		view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+        glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+        glm::vec3 cameraDirection = glm::normalize(cameraPos - cameraTarget);
+        glm::mat4 view;
+        const float radius = 10.0f;
+        float camX = sin(static_cast<float>(glfwGetTime())) * radius;
+        float camZ = cos(static_cast<float>(glfwGetTime())) * radius;
+        view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 
-		shader.setMat4f("view", view);
-		glm::mat4 projection;
-		projection = glm::perspective(glm::radians(fov), 800.0f / 600.0f, 0.1f, 100.0f);
+        shader.setMat4f("view", view);
+        glm::mat4 projection;
+        projection = glm::perspective(glm::radians(fov), 800.0f / 600.0f, 0.1f, 100.0f);
 
-		shader.setMat4f("projection", projection);
-		glm::mat4 model = glm::mat4(1.0f);
-        //model = glm::rotate(glm::mat4(1.0f), (float)glfwGetTime(), glm::vec3(0.0f, 1.0f, 0.0f));
-		shader.setMat4f("model", model);
+        shader.setMat4f("projection", projection);
+        glm::mat4 model = glm::mat4(1.0f);
+        shader.setMat4f("model", model);
 
-		float vector[4] = { (float)sin(glfwGetTime()), (float)cos(glfwGetTime()), (float)acos(glfwGetTime()), 1.0 };
-		//shader.setVec4f("color1", vector);
+        float vector[4] = { sin(static_cast<float>(glfwGetTime())), cos(static_cast<float>(glfwGetTime())), acos(static_cast<float>(glfwGetTime())), 1.0f };
 
         VAO.bind();
         tex1.bind(0);
-		glDrawElements(GL_TRIANGLES, 36 * numCubes, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(36 * numCubes), GL_UNSIGNED_INT, nullptr);
         glBindVertexArray(0);
 
         glfwSwapBuffers(window);

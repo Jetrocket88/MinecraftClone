@@ -1,0 +1,44 @@
+#pragma once
+
+#include "vertex.h"
+#include <vector>
+
+
+
+#ifndef FACE_H
+#define FACE_H
+
+class face{
+public:
+    face(int x, int y, int z, std::vector<Vertex>& vertexArray, unsigned int& count);
+
+private:
+    const std::vector<glm::vec3> frontVertices = {
+        { 0, 0, 0 }, { 1, 0, 0 }, { 1, 1, 0 }, { 0, 1, 0 }
+    };
+
+    const std::vector<glm::vec3> backVertices = {
+        { 0, 0, -1 }, { 1, 0, -1 }, { 1, 1, -1 }, { 0, 1, -1 }
+    };
+
+    const std::vector<glm::vec3> leftVertices = {
+        { 0, 0, 0 }, { 0, 0, -1 }, { 0, 1, -1 }, { 0, 1, 0 }
+    };
+
+    const std::vector<glm::vec3> rightVertices = {
+        { 1, 0, 0 }, { 1, 0, -1 }, { 1, 1, -1 }, { 1, 1, 0 }
+    };
+
+    const std::vector<glm::vec3> topVertices = {
+        { 0, 1, 0 }, { 1, 1, 0 }, { 1, 1, -1 }, { 0, 1, -1 }
+    };
+
+    const std::vector<glm::vec3> bottomVertices = {
+        { 0, 0, 0 }, { 1, 0, 0 }, { 1, 0, -1 }, { 0, 0, -1 }
+    };
+
+    const glm::vec2 faceTexCoords[4] = {
+        {1, 0}, {0, 0}, {0, 1}, {1, 1}
+    };
+};
+#endif

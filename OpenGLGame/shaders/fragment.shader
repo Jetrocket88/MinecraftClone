@@ -12,7 +12,7 @@ uniform vec4 color1;
 void main() {
 		
 	vec4 texColor = texture(texture1, TexCoord);
-	FragColor = texColor; 
+	FragColor = texColor * ColorVal; 
 }
 
 
