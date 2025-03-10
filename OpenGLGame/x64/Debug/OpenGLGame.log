@@ -1,2 +1,5 @@
 ﻿  main.cpp
-  OpenGLGame.vcxproj -> C:\Users\harry\source\repos\OpenGLGame\x64\Debug\OpenGLGame.exe
+C:\Users\harry\source\repos\OpenGlGame\OpenGLGame\src\main.cpp(152,44): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+  OpenGLGame.vcxproj -> C:\Users\harry\source\repos\OpenGlGame\x64\Debug\OpenGLGame.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.

@@ -15,7 +15,7 @@ class IndexBuffer{
 public:
 	unsigned int ID;
 	unsigned int count;
-	unsigned int* data;
+	std::vector<unsigned int> vecData;
 
 	IndexBuffer(unsigned int numCubes);
 	~IndexBuffer();
@@ -24,7 +24,6 @@ public:
 	void unBind()const;
 private:
 	unsigned int* generateData(const unsigned int numCubes);
-	std::vector<unsigned int> vecData;
 };
 
 #endif 

@@ -132,17 +132,24 @@ int main() {
     std::vector<Vertex> verticesStruct;
     std::vector<face> faces;
     faces.push_back(face(0, 0, 0, verticesStruct, numCubes, TOP));
-    faces.push_back(face(0, 0, 0, verticesStruct, numCubes, BACK));
-    faces.push_back(face(0, 0, 0, verticesStruct, numCubes, FRONT));
-    faces.push_back(face(0, 0, 0, verticesStruct, numCubes, RIGHT));
-    faces.push_back(face(0, 0, 0, verticesStruct, numCubes, LEFT));
-    faces.push_back(face(0, 0, 0, verticesStruct, numCubes, BOTTOM));
+    //faces.push_back(face(0, 0, 0, verticesStruct, numCubes, BACK));
+    //faces.push_back(face(0, 0, 0, verticesStruct, numCubes, FRONT));
+    //faces.push_back(face(0, 0, 0, verticesStruct, numCubes, RIGHT));
+    //faces.push_back(face(0, 0, 0, verticesStruct, numCubes, LEFT));
+    //faces.push_back(face(0, 0, 0, verticesStruct, numCubes, BOTTOM));
 
     Texture tex1("res/sillyCat.jpg", "jpg");
 
-    IndexBuffer IBO(numCubes);
+    std::vector<unsigned int> indices = 
+    {
+        0, 1, 2, // First triangle
+        2, 3, 0  // Second triangle
+    };
 
-    VertexBuffer VBO(9 * 4 * sizeof(float) * numCubes, verticesStruct.data());
+    IndexBuffer IBO(numCubes);
+    IBO.vecData = indices;
+
+    VertexBuffer VBO(verticesStruct.size() * sizeof(Vertex), verticesStruct.data());
 
     VertexArray VAO;
     VertexBufferLayout layout;
@@ -196,7 +203,7 @@ int main() {
 
         VAO.bind();
         tex1.bind(0);
-        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(36 * numCubes), GL_UNSIGNED_INT, nullptr);
+        glDrawElements(GL_TRIANGLES, numCubes * 6, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
 
         glfwSwapBuffers(window);
